@@ -1,16 +1,16 @@
 #!/usr/bin/bash
-for x in `ls | grep .png`; do
-echo $x; pngcrush -rem alla -brute -reduce $x opt-$x | grep 'filesize reduction'
+for file in *.png; do
+echo $file; pngcrush -rem alla -brute -reduce $file opt-$file | grep 'filesize reduction'
 done
 
-for x in `ls | grep .jpg`; do
-PESO=`stat -c%s $x` 
-  if [ "$PESO" -lt "10240" ]
+for file in *.jpg; do
+IMAGESIZE=`stat -c%s $file` 
+  if [ "$IMAGESIZE" -lt "10240" ]
     then
-      jpegtran -copy none -optimize $x > opt-$x
-      echo $x saved as JPEG Baseline
+      jpegtran -copy none -optimize $file > opt-$file
+      echo $file saved as JPEG Baseline
     else
-      jpegtran -copy none -optimize -progressive $x > opt-$x
-      echo $x saved as JPEG Progressive
+      jpegtran -copy none -optimize -progressive $file > opt-$file
+      echo $file saved as JPEG Progressive
   fi
 done
