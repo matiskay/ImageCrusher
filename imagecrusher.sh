@@ -1,10 +1,13 @@
 #!/usr/bin/bash
-for file in *.png; do
-echo $file; pngcrush -rem alla -brute -reduce $file opt-$file | grep 'filesize reduction'
+for file in *.png
+do
+  echo $file
+  pngcrush -rem alla -brute -reduce $file opt-$file | grep 'filesize reduction'
 done
 
-for file in *.jpg; do
-IMAGESIZE=`stat -c%s $file` 
+for file in *.jpg
+do
+  IMAGESIZE=`stat -c%s $file` 
   if [ "$IMAGESIZE" -lt "10240" ]
     then
       jpegtran -copy none -optimize $file > opt-$file
