@@ -8,7 +8,7 @@ done
 for file in *.jpg
 do
   IMAGESIZE=`stat -c%s $file` 
-  if [ "$IMAGESIZE" -lt "10240" ]
+  if [[ "$IMAGESIZE" -lt "10240" ]]
     then
       jpegtran -copy none -optimize $file > opt-$file
       echo $file saved as JPEG Baseline
